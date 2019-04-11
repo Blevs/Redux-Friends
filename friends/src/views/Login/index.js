@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions';
+import Error from '../../components/Error';
 
 const Login = ({loggingIn, login, error, history}) => {
   const performLogin = event => {
@@ -16,7 +17,7 @@ const Login = ({loggingIn, login, error, history}) => {
   };
   return (
     <div className={"login" + (loggingIn ? " loading" : "")}>
-      {error && <div className="error">{error.response.data.error}</div>}
+      {error && <Error error={error}/>}
       <form onSubmit={performLogin}>
         <input type="text" name="username" placeholder="username" />
         <input type="password" name="password" placeholder="password" />

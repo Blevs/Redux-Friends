@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getFriends, deleteFriend, addFriend } from '../../actions';
+import Error from '../../components/Error';
 
-const FriendsList = ({friends, getFriends, deleteFriend, addFriend, ...props}) => {
+const FriendsList = ({friends, getFriends, deleteFriend, addFriend, error, ...props}) => {
   const performAddFriend = event => {
     event.preventDefault();
     addFriend({
@@ -24,6 +25,7 @@ const FriendsList = ({friends, getFriends, deleteFriend, addFriend, ...props}) =
         <input type="email" name="email" placeholder="email" />
         <button type="submit">Add Friend</button>
       </form>
+      {error && <Error error={error}/>}
     </div>
   );
 };
@@ -32,7 +34,8 @@ const mapStateToProps = state => ({
   friends: state.friends,
   gettingFriends: state.gettingFriends,
   deletingFriend: state.deletingFriend,
-  addingFriend: state.addingFriend
+  addingFriend: state.addingFriend,
+  error: state.error
 });
 
 export default connect(mapStateToProps, { getFriends, deleteFriend, addFriend })(FriendsList);
