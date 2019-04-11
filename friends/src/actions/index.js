@@ -27,3 +27,14 @@ export const getFriends = () => dispatch => {
     .then(res => dispatch({ type: GET_FRIENDS_SUCCESS, friends: res.data }))
     .catch(error => dispatch({ type: GET_FRIENDS_FAILURE, error: error }));
 };
+
+export const DELETE_FRIEND_START = 'DELETE_FRIENDS_START';
+export const DELETE_FRIEND_SUCCESS = 'DELETE_FRIENDS_SUCCESS';
+export const DELETE_FRIEND_FAILURE = 'DELETE_FRIENDS_FAILURE';
+
+export const deleteFriend = (id) => dispatch => {
+  dispatch({ type: DELETE_FRIEND_START });
+  return axiosWithAuth().delete(apiUrl + '/api/friends/' + id)
+    .then(res => dispatch({ type: DELETE_FRIEND_SUCCESS, friends: res.data }))
+    .catch(error => dispatch({ type: DELETE_FRIEND_FAILURE, error: error }));
+};
