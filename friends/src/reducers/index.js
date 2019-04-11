@@ -2,6 +2,7 @@ import {
   LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE,
   GET_FRIENDS_START, GET_FRIENDS_SUCCESS, GET_FRIENDS_FAILURE,
   DELETE_FRIEND_START, DELETE_FRIEND_SUCCESS, DELETE_FRIEND_FAILURE,
+  ADD_FRIEND_START, ADD_FRIEND_SUCCESS, ADD_FRIEND_FAILURE,
 } from '../actions';
 
 const initialState = {
@@ -9,7 +10,7 @@ const initialState = {
   gettingFriends: false,
   friends: [],
   loggingIn: false,
-  savingFriends: false,
+  addingFriend: false,
   updatingFriend: false,
   error: null
 };
@@ -52,6 +53,25 @@ const rootReducer = (state = initialState, action) => {
     return {
       ...state,
       deletingFriend: false,
+      error: action.error
+    };
+  case ADD_FRIEND_START:
+    return {
+      ...state,
+      addingFriend: true,
+      error: null
+    };
+  case ADD_FRIEND_SUCCESS:
+    return {
+      ...state,
+      addingFriend: false,
+      friends: action.friends,
+      error: null
+    };
+  case ADD_FRIEND_FAILURE:
+    return {
+      ...state,
+      addingFriend: false,
       error: action.error
     };
   case LOGIN_START:
