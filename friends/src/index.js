@@ -8,6 +8,7 @@ import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { authTokenLocalStorage } from './middleware';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const store = createStore(
   rootReducer,
@@ -16,7 +17,9 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
-  </Provider> ,
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
