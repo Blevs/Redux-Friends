@@ -5,12 +5,14 @@ import { login } from '../../actions';
 const Login = ({loggingIn, login, error, history}) => {
   const performLogin = event => {
     event.preventDefault();
-    login({
-      username: event.target.username.value,
-      password: event.target.password.value
-    });
-    event.target.password.value = "";
-    history.push("/");
+    event.persist();
+    const username =  event.target.username.value,
+          password = event.target.password.value;
+    login({ username, password })
+      .then(() => {
+        history.push("/friends-list");
+      })
+      .catch(() => event.target.password.value = "");
   };
   return (
     <div className={"login" + (loggingIn ? " loading" : "")}>
