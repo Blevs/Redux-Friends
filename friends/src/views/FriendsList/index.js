@@ -15,9 +15,11 @@ const FriendsList = ({friends, getFriends, deleteFriend, addFriend, error, ...pr
   useEffect(() => { getFriends(); }, []);
   return (
     <div className={"friends-list" + (props.gettingFriends || props.deletingFriend || props.addingFriend ? " loading" : "")}>
-      {friends.map(f => <div key={f.id}>
-                          {f.name}, {f.age}, {f.email}
-                          <span onClick={() => deleteFriend(f.id)}>&times;</span>
+      {friends.map(f => <div className="friend" key={f.id}>
+                          <h2 className="name">{f.name}</h2>
+                          <span className="age">{f.age}</span>
+                          <span className="email">{f.email}</span>
+                          <span className="delete" onClick={() => deleteFriend(f.id)}>&times;</span>
                         </div>)}
       <form onSubmit={performAddFriend}>
         <input type="text" name="name" placeholder="name" />
